@@ -1,0 +1,152 @@
+Here you can see my web page
+
+[FrstWebAge.html](https://github.com/user-attachments/files/22322924/FrstWebAge.html)
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title> "My First Webpage" </title>
+    <h1> Aldiyar</h1>
+    <h2> MT-2406</h2>
+    <h3> Like codding, or not </h3>
+    <p>
+        <hr>
+        My name is Aldiyar, Im2nd year student. I Animate Chibi 2D Characters,
+        as a hobby I make web games and sometimes,
+        put my hand on creating own animation project
+        with interisting characters and their breathtaking adventure.
+    </p>
+
+
+</head>
+
+<body>
+    <p>
+
+
+        <h2> My Hobby</h2>
+        <hr>
+        <ol>
+            <li> Discovering someting new </li>
+            <li> Reading </li>
+            <li> Writing </li>
+            <li> Unity Web Games </li>
+            <li> Earning Money </li>
+        </ol>
+        <hr />
+
+        <h1> TOP 5</h1>
+        <h2>Sites that I like</h2>
+        <ol>
+            <li
+            <ul> https://github.com</ul>
+            </li>
+            <li
+            <ul> https://github.com/copilot</ul>
+            </li>
+            <li
+                <ul> https://www.youtube.com/ </ul>
+            </li>
+            <li
+                <ul> https://play.geforcenow.com </ul>
+            </li>
+            <li
+                <ul> https://yandex.kz/games</ul>
+            </li>
+
+        </ol>
+        <hr>
+        <h1>TOP 5</h1>
+        <h2>Images that I like</h2>
+        <ol>
+            <li><a href="https://github.com"> <img src="C:\Users\user\Downloads\efwfsd.webp" alt="Not my car" width="30%" /></a> </li>
+            <li> <img src="C:\Users\user\Pictures\Screenshots\Снимок экрана 2024-09-28 233200.png" alt="Not my car 2" width="30%" /></li>
+            <li><a href="https://yandex.kz/games"> <img src="C:\Users\user\Pictures\Screenshots\Снимок экрана 2025-03-30 181215.png" alt="Not my car but this is my game :D" width="30%" /></a> </li>
+            <li>Don`t know what to show, here some art</li>
+            <li> <img src="C:\Users\user\Desktop\BAITEREK\That Scene.png" alt="drawing 1" width="30%" /> </li>
+            <li> <img src="C:\Users\user\Documents\FROM_White_PC\Документы\Animations Drawings\блу.png" alt="drawing 1 width=" 30%"" /> </li>
+        </ol>
+        <hr />
+        <button>Нажми меня</button>
+    </p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Subject</th> <!-- заголовок первой колонки -->
+                <th>Day</th>     <!-- заголовок второй колонки -->
+                <th>Time</th>     <!-- заголовок второй колонки -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Operating System</td>   <!-- ячейка: время дня -->
+                <td>Monday</td> <!-- ячейка: месяц -->
+                <td>10:00-10:50</td> <!-- ячейка: месяц -->
+            </tr>
+            <tr>
+                <td>Operating System</td>   <!-- ячейка: время дня -->
+                <td>Monday</td> <!-- ячейка: месяц -->
+                <td>11:00-11:50</td> <!-- ячейка: месяц -->
+            </tr>
+            <tr>
+                <td>Foundation of ScreenWriting</td>   <!-- ячейка: время дня -->
+                <td>Monday</td> <!-- ячейка: месяц -->
+                <td>14:00-14:50</td> <!-- ячейка: месяц -->
+            </tr>
+            <tr>
+                <td>Cinematography and Digtal Editing</td>   <!-- ячейка: время дня -->
+                <td>Monday</td> <!-- ячейка: месяц -->
+                <td>16:00-16:50</td> <!-- ячейка: месяц -->
+            </tr>
+            <tr>
+                <td>Cinematography and Digtal Editing</td>   <!-- ячейка: время дня -->
+                <td>Monday</td> <!-- ячейка: месяц -->
+                <td>17:00-17:50</td> <!-- ячейка: месяц -->
+            </tr>
+        </tbody>
+    </table>
+
+    <table border="1" width="100%">
+        <tr>
+            <!--first column-->
+            <td width="30%">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="https://www.youtube.com/@Paxmet">You Tube</a></li>
+                    <li><a href="https://yandex.ru/games/developer/59854">YG games</a></li>
+                    <li><a href="https://www.instagram.com/paxmet.ani/">Instagram</a></li>
+                </ul>
+            </td>
+
+            <td width="70%">
+                <h2>About me:</h2>
+                <p>
+                    Again, my name is Aldiyar. And Im a student, 2D Computer animator, Unity Web Game Developer, also a big bro.
+                    Current Mood - 🤩🥶🤨
+                </p>
+            </td>
+        </tr>
+    </table>
+
+
+    <h1>Git Form</h1>
+
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <br><br>
+
+        <label for="color">Favorite Color:</label>
+        <input type="color" id="color" name="color">
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
