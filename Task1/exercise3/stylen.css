@@ -1,0 +1,117 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f9f9f9, #ececec);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Заголовки */
+#table-heading {
+    display: block;
+    max-width: 300px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+
+    text-align: center;
+    font-size: 32px;
+    color: #004085;
+    margin: 40px 0 20px 0;
+}
+
+#form-heading {
+    text-align: center;
+    font-size: 28px;
+    color: #721c24;
+    margin: 40px 0 20px 0;
+}
+
+/* Таблица */
+table {
+    align: center;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto 50px auto;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+th {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 14px;
+    font-size: 18px;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.highlight-row {
+    background-color: #fff3cd;
+    font-weight: bold;
+}
+
+/* Форма */
+#feedback-form {
+    background: white;
+    max-width: 500px;
+    margin: 0 auto 60px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+    #feedback-form label {
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    #feedback-form input,
+    #feedback-form select,
+    #feedback-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+        #feedback-form input:focus,
+        #feedback-form select:focus,
+        #feedback-form textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+    #feedback-form button {
+        background: linear-gradient(135deg, #721c24, #a71d2a);
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: 0.3s ease;
+    }
+
+        #feedback-form button:hover {
+            background: linear-gradient(135deg, #a71d2a, #721c24);
+            transform: translateY(-2px);
+        }
