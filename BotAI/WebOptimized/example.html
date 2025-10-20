@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bot System - Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        
+        #gameCanvas {
+            display: block;
+            background: #2a2a2a;
+            border: 2px solid #444;
+        }
+        
+        #stats {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 250px;
+        }
+        
+        #stats h3 {
+            margin: 0 0 10px 0;
+            color: #4CAF50;
+        }
+        
+        #stats div {
+            margin: 5px 0;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+    
+    <div id="stats">
+        <h3>📊 AI Performance Stats</h3>
+        <div>Total Bots: <span id="totalBots">0</span></div>
+        <div>Active Bots: <span id="activeBots">0</span></div>
+        <div>In Combat: <span id="combatBots">0</span></div>
+        <div>Clustered Areas: <span id="clusteredAreas">0</span></div>
+        <div>FPS: <span id="fps">60</span></div>
+        <div>Avg Update Time: <span id="updateTime">0</span> ms</div>
+        <div>Frame Updates: <span id="frameUpdates">0</span></div>
+    </div>
+    
+    <div id="controls">
+        <h3>🎮 Controls</h3>
+        <button onclick="spawnBot()">Add Bot</button>
+        <button onclick="removeBot()">Remove Bot</button>
+        <button onclick="togglePause()">Pause/Resume</button>
+        <button onclick="resetSimulation()">Reset</button>
+    </div>
+
+    <!-- Load AI Scripts -->
+    <script src="AIMovement.js"></script>
+    <script src="AICombat.js"></script>
+    <script src="AIDecisionMaking.js"></script>
+    <script src="AIPerformanceManager.js"></script>
+    <script src="AIBotEntity.js"></script>
+    
+    <script>
+        // Setup canvas
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Game state
+        let isPaused = false;
+        let lastFrameTime = performance.now();
+        
+        // Player position (mouse controlled)
+        const player = {
+            position: { x: 400, y: 0, z: 300 },
+            velocity: { x: 0, y: 0, z: 0 },
+            health: 100,
+            maxHealth: 100,
+            takeDamage: function(damage) {
+                this.health = Math.max(0, this.health - damage);
+            }
+        };
+        
+        // AI Manager
+        const aiManager = new AIPerformanceManager({
+            maxBotsPerFrame: 5,
+            spatialGridSize: 10,
+            maxBotsInCluster: 2
+        });
+        
+        // Bot spawning
+        function spawnBot() {
+            const x = Math.random() * 700 + 50;
+            const z = Math.random() * 500 + 50;
+            
+            const bot = new AIBotEntity({ x, y: 0, z }, {
+                movement: {
+                    baseSpeed: 3 + Math.random() * 2,
+                    personalSpaceRadius: 3
+                },
+                combat: {
+                    attackRange: 8 + Math.random() * 4,
+                    aggressionLevel: 0.5 + Math.random() * 0.4
+                },
+                decisionMaking: {
+                    detectionRange: 25 + Math.random() * 10
+                }
+            });
+            
+            // Setup callbacks
+            bot.onAttack = (isHit) => {
+                if (isHit) {
+                    player.takeDamage(bot.combat.weaponDamage);
+                }
+            };
+            
+            aiManager.registerBot(bot);
+        }
+        
+        function removeBot() {
+            if (aiManager.allBots.length > 0) {
+                const bot = aiManager.allBots[aiManager.allBots.length - 1];
+                aiManager.unregisterBot(bot);
+            }
+        }
+        
+        function togglePause() {
+            isPaused = !isPaused;
+        }
+        
+        function resetSimulation() {
+            aiManager.clearAll();
+            player.health = player.maxHealth;
+        }
+        
+        // Mouse tracking for player position
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            player.position.x = e.clientX - rect.left;
+            player.position.z = e.clientY - rect.top;
+        });
+        
+        // Main game loop
+        function gameLoop() {
+            const now = performance.now();
+            const deltaTime = now - lastFrameTime;
+            lastFrameTime = now;
+            
+            // Clear canvas
+            ctx.fillStyle = '#2a2a2a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            if (!isPaused) {
+                // Update AI system
+                aiManager.update(deltaTime, player.position);
+                
+                // Update stats display
+                updateStats();
+            }
+            
+            // Render
+            render();
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Render function
+        function render() {
+            // Draw spatial grid (debug)
+            ctx.strokeStyle = 'rgba(100, 100, 100, 0.3)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < canvas.width; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Draw player
+            ctx.fillStyle = '#4CAF50';
+            ctx.beginPath();
+            ctx.arc(player.position.x, player.position.z, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw player health
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px Arial';
+            ctx.fillText(`HP: ${Math.round(player.health)}`, player.position.x - 20, player.position.z - 15);
+            
+            // Draw bots
+            for (const bot of aiManager.allBots) {
+                if (!bot || !bot.active) continue;
+                
+                const state = bot.getState();
+                
+                // Bot color based on state
+                let color = '#888';
+                if (state.isInCombat) color = '#f44336';
+                else if (state.decision === 'hunt') color = '#ff9800';
+                else if (state.decision === 'patrol') color = '#2196F3';
+                
+                // Draw bot
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(bot.position.x, bot.position.z, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw direction indicator
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(bot.position.x, bot.position.z);
+                ctx.lineTo(
+                    bot.position.x + Math.sin(bot.rotation) * 15,
+                    bot.position.z + Math.cos(bot.rotation) * 15
+                );
+                ctx.stroke();
+                
+                // Draw destination if has one
+                if (bot.movement.hasDestination && bot.movement.destination) {
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+                    ctx.moveTo(bot.position.x, bot.position.z);
+                    ctx.lineTo(bot.movement.destination.x, bot.movement.destination.z);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+                
+                // Draw health bar
+                const healthWidth = 20;
+                const healthHeight = 3;
+                const healthPercent = state.health;
+                
+                ctx.fillStyle = '#333';
+                ctx.fillRect(bot.position.x - healthWidth/2, bot.position.z - 15, healthWidth, healthHeight);
+                ctx.fillStyle = healthPercent > 0.5 ? '#4CAF50' : (healthPercent > 0.25 ? '#ff9800' : '#f44336');
+                ctx.fillRect(bot.position.x - healthWidth/2, bot.position.z - 15, healthWidth * healthPercent, healthHeight);
+            }
+        }
+        
+        // Update stats display
+        function updateStats() {
+            const stats = aiManager.getStats();
+            
+            document.getElementById('totalBots').textContent = stats.totalBots;
+            document.getElementById('activeBots').textContent = stats.activeBots;
+            document.getElementById('combatBots').textContent = stats.botsInCombat;
+            document.getElementById('clusteredAreas').textContent = stats.clusteredAreas;
+            document.getElementById('fps').textContent = stats.fps;
+            document.getElementById('updateTime').textContent = stats.avgUpdateTime.toFixed(2);
+            document.getElementById('frameUpdates').textContent = stats.frameUpdateCount;
+        }
+        
+        // Initialize with some bots
+        for (let i = 0; i < 10; i++) {
+            spawnBot();
+        }
+        
+        // Start game loop
+        gameLoop();
+    </script>
+</body>
+</html>
