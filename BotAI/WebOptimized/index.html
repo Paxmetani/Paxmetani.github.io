@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-Optimized AI System - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            color: #a8dadc;
+            margin-bottom: 30px;
+        }
+        
+        .demo-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(76, 175, 80, 0.6);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .feature-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .scripts-section {
+            margin: 60px 0;
+        }
+        
+        .scripts-section h2 {
+            color: #4CAF50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .script-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .script-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+        }
+        
+        .script-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-left-width: 8px;
+        }
+        
+        .script-item h4 {
+            color: #4CAF50;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .script-item p {
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+        
+        .script-link {
+            display: inline-block;
+            color: #4CAF50;
+            text-decoration: none;
+            padding: 8px 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .script-link:hover {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            color: #4CAF50;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #a8dadc;
+            font-size: 1em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+        }
+        
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Web-Optimized AI System</h1>
+            <p class="tagline">High-Performance Tactical AI for Browser Games</p>
+            <a href="example.html" class="demo-button">🎮 Live Demo</a>
+        </header>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>🎲 Tactical Unpredictability</h3>
+                <ul>
+                    <li>Unique personality per bot</li>
+                    <li>6 dynamic combat tactics</li>
+                    <li>Randomized movement patterns</li>
+                    <li>Context-aware decisions</li>
+                    <li>Adaptive behavior</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>⚡ Web Performance</h3>
+                <ul>
+                    <li>Spatial hashing (O(1) queries)</li>
+                    <li>4-tier LOD system</li>
+                    <li>Object pooling</li>
+                    <li>Frame-rate limiting</li>
+                    <li>Result caching</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🎯 Advanced Features</h3>
+                <ul>
+                    <li>Anti-clustering system</li>
+                    <li>Predictive aiming</li>
+                    <li>Burst fire patterns</li>
+                    <li>Combat strafing</li>
+                    <li>Stuck detection</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">Bots @ 60 FPS</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">&lt;5ms</span>
+                <span class="stat-label">Avg Update Time</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Combat Tactics</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">4</span>
+                <span class="stat-label">LOD Levels</span>
+            </div>
+        </div>
+        
+        <section class="scripts-section">
+            <h2>📦 Available Scripts</h2>
+            <div class="script-list">
+                <div class="script-item">
+                    <h4>AIMovement.js</h4>
+                    <p>Movement system with anti-clustering, personalized speeds, and dynamic patterns. Includes combat strafing and stuck detection.</p>
+                    <a href="AIMovement.js" class="script-link">View Script →</a>
+                </div>
+                
+                <div class="script-item">
+                    <h4>AICombat.js</h4>
+                    <p>Tactical combat with 6 behaviors: engage, flank, advance, retreat, suppress, ambush. Features predictive aiming and burst fire.</p>
+                    <a href="AICombat.js" class="script-link">View Script →</a>
+                </div>
+                
+                <div class="script-item">
+                    <h4>AIDecisionMaking.js</h4>
+                    <p>Priority-based decision system with spatial awareness. Prevents clustering and manages tactical choices.</p>
+                    <a href="AIDecisionMaking.js" class="script-link">View Script →</a>
+                </div>
+                
+                <div class="script-item">
+                    <h4>AIPerformanceManager.js</h4>
+                    <p>Central optimization system with spatial hashing, LOD, object pooling, and performance monitoring.</p>
+                    <a href="AIPerformanceManager.js" class="script-link">View Script →</a>
+                </div>
+                
+                <div class="script-item">
+                    <h4>AIBotEntity.js</h4>
+                    <p>Complete bot entity combining all AI systems. Easy-to-use interface with event callbacks.</p>
+                    <a href="AIBotEntity.js" class="script-link">View Script →</a>
+                </div>
+                
+                <div class="script-item">
+                    <h4>example.html</h4>
+                    <p>Interactive demo with visual representation, performance stats, and bot controls. See the AI in action!</p>
+                    <a href="example.html" class="script-link">Open Demo →</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="scripts-section">
+            <h2>📚 Documentation</h2>
+            <div class="script-list">
+                <div class="script-item">
+                    <h4>README.md</h4>
+                    <p>Complete documentation with API reference, usage examples, customization guide, and integration tips.</p>
+                    <a href="README.md" class="script-link">Read Docs →</a>
+                </div>
+                
+                <div class="script-item">
+                    <h4>IMPLEMENTATION_SUMMARY.md</h4>
+                    <p>Detailed summary of implementation, features, optimizations, and performance benchmarks.</p>
+                    <a href="IMPLEMENTATION_SUMMARY.md" class="script-link">View Summary →</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="scripts-section">
+            <h2>🚀 Quick Start</h2>
+            <div class="feature-card">
+                <h3>Basic Usage Example</h3>
+                <pre style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; overflow-x: auto; color: #e0e0e0;">
+<code>// Create AI manager
+const aiManager = new AIPerformanceManager({
+    maxBotsPerFrame: 5,
+    maxBotsInCluster: 2
+});
+
+// Spawn a bot
+const bot = new AIBotEntity({ x: 100, y: 0, z: 100 }, {
+    movement: { baseSpeed: 3.5 },
+    combat: { attackRange: 10, aggressionLevel: 0.7 },
+    decisionMaking: { detectionRange: 30 }
+});
+
+// Register bot
+aiManager.registerBot(bot);
+
+// Game loop
+function update() {
+    const deltaTime = 16; // ~60fps
+    aiManager.update(deltaTime, playerPosition);
+    requestAnimationFrame(update);
+}</code></pre>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Built with ❤️ for high-performance web games</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                All scripts are production-ready and free to use
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
